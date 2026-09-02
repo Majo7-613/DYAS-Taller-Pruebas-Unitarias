@@ -1,5 +1,4 @@
 package edu.unisabana.tyvs.domain.model;
-
 /**
  * Resultado posible de un intento de registro de votante.
  *
