@@ -16,13 +16,13 @@
     <!-- Si tu JDK es anterior a 17, baja este valor al de tu computador (por ejemplo 11 u 8). -->
     <maven.compiler.release>17</maven.compiler.release>
     <junit.version>5.10.2</junit.version>
-    <jqwik.version>1.8.4</jqwik.version>
+    <jqwik.version>1.8.0</jqwik.version>
     <pitest.version>1.16.1</pitest.version>
     <pitest.junit5.version>1.2.1</pitest.junit5.version>
   </properties>
 
   <dependencies>
-    <!-- JUnit 5 (Jupiter): @Test, @BeforeEach, @DisplayName, Assertions -->
+    <!-- Agregador completo de JUnit 5 (incluye api, engine y params alineados) -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -30,8 +30,7 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- jqwik: pruebas basadas en propiedades.
-         Genera cientos de entradas y reduce el contraejemplo al minimo (shrinking). -->
+    <!-- jqwik: pruebas basadas en propiedades -->
     <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>

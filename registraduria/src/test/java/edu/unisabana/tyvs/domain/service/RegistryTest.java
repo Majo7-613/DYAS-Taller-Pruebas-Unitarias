@@ -3,7 +3,7 @@ package edu.unisabana.tyvs.domain.service;
 import edu.unisabana.tyvs.domain.model.Gender;
 import edu.unisabana.tyvs.domain.model.Person;
 import edu.unisabana.tyvs.domain.model.RegisterResult;
-
+import edu.unisabana.tyvs.domain.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Complemento: RegistryPropertiesTest expresa las mismas reglas como
  * PROPIEDADES sobre rangos completos de entradas, en vez de ejemplos sueltos.
  */
-class RegistryTest {
+public class RegistryTest {
 
     private Registry registry;
 
@@ -37,6 +37,8 @@ class RegistryTest {
     @Test
     @DisplayName("Una persona viva y mayor de edad queda registrada")
     void shouldRegisterValidPerson() {
+        Registry registry = new Registry();
+
         // Arrange: preparar los datos
         Person person = new Person("Ana", 1, 30, Gender.FEMALE, true);
 
@@ -63,10 +65,13 @@ class RegistryTest {
     @Test
     @DisplayName("Una persona nula se rechaza con INVALID")
     void shouldReturnInvalidWhenPersonIsNull() {
-        // Act
-        RegisterResult result = registry.registerVoter(null);
+        // Arrange (Preparación)
+        Person person = null;
 
-        // Assert
+        // Act (Ejecución)
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert (Verificación)
         assertEquals(RegisterResult.INVALID, result);
     }
 }
