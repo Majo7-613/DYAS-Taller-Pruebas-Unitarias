@@ -3,31 +3,80 @@ package edu.unisabana.tyvs.domain.service;
 import edu.unisabana.tyvs.domain.model.Person;
 import edu.unisabana.tyvs.domain.model.RegisterResult;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * PUNTO DE PARTIDA DEL TALLER - no es la solucion final.
+ * Caso de uso del dominio: inscribir a una persona como votante.
  *
- * Esta clase es el estado del codigo al terminar la ITERACION 2 del README
- * (regla "persona muerta"). Las reglas que faltan son las que usted debe
- * construir con TDD (Red -> Green -> Refactor):
+ * Reglas de negocio, en su orden de evaluacion. La PRIMERA que falla determina
+ * el resultado, de modo que una persona muerta de 15 anios devuelve DEAD y no
+ * UNDERAGE. Ese orden es una decision de diseno y esta fijado con pruebas
+ * (ver shouldPrioritizeDeadOverUnderage y shouldPrioritizeInvalidIdOverDead).
  *
- *   - id <= 0                -> INVALID
- *   - edad < 0 o edad > 120  -> INVALID_AGE
- *   - 0 <= edad < 18         -> UNDERAGE
- *   - id ya registrado antes -> DUPLICATED
+ *   R1  persona nula                  -> INVALID
+ *   R2  id < MIN_VALID_ID             -> INVALID
+ *   R3  no esta viva                  -> DEAD
+ *   R4  edad fuera de [MIN_AGE,MAX_AGE] -> INVALID_AGE
+ *   R5  edad < MIN_VOTING_AGE         -> UNDERAGE
+ *   R6  id ya inscrito                -> DUPLICATED
+ *   R7  cumple todas las anteriores   -> VALID
  *
- * Escriba PRIMERO la prueba que falla, luego la implementacion minima.
+ * El dominio no conoce bases de datos, HTTP ni frameworks: las dependencias
+ * apuntan hacia adentro (Arquitectura Limpia).
  */
 public class Registry {
 
+    /** Documento positivo mas pequenio que se considera valido. */
+    public static final int MIN_VALID_ID = 1;
+
+    /** Edad minima biologicamente posible. */
+    public static final int MIN_AGE = 0;
+
+    /** Edad maxima biologicamente posible. */
+    public static final int MAX_AGE = 120;
+
+    /** Edad a partir de la cual se puede votar. */
+    public static final int MIN_VOTING_AGE = 18;
+
+    /**
+     * Documentos ya inscritos.
+     *
+     * Es un campo DE INSTANCIA, nunca estatico: si fuera estatico, el estado se
+     * filtraria entre pruebas y el resultado dependeria del orden de ejecucion.
+     * El @BeforeEach de RegistryTest se apoya en esta decision.
+     */
+    private final Set<Integer> registeredIds = new HashSet<>();
+
+    /**
+     * Evalua las reglas R1..R7 sobre la persona y, si todas se cumplen, la
+     * inscribe.
+     *
+     * @param p persona a inscribir; se admite null (regla defensiva R1)
+     * @return el resultado de la primera regla incumplida, o VALID
+     */
     public RegisterResult registerVoter(Person p) {
-        if (p == null) {
-            return RegisterResult.INVALID; // regla defensiva
+        if (p == null) {                                            // R1
+            return RegisterResult.INVALID;
         }
-        if (!p.isAlive()) {
+        if (p.getId() < MIN_VALID_ID) {                             // R2
+            return RegisterResult.INVALID;
+        }
+        if (!p.isAlive()) {                                         // R3
             return RegisterResult.DEAD;
         }
-        // Implementacion minima para pasar las pruebas de la iteracion 2.
-        // TODO iteracion 3 en adelante: validar id, edad y duplicados.
-        return RegisterResult.VALID;
+        if (p.getAge() < MIN_AGE || p.getAge() > MAX_AGE) {         // R4
+            return RegisterResult.INVALID_AGE;
+        }
+        if (p.getAge() < MIN_VOTING_AGE) {                          // R5
+            return RegisterResult.UNDERAGE;
+        }
+        if (registeredIds.contains(p.getId())) {                    // R6
+            return RegisterResult.DUPLICATED;
+        }
+        // Solo un registro exitoso consume el numero de documento: si alguna
+        // regla anterior rechaza a la persona, el documento sigue libre.
+        registeredIds.add(p.getId());
+        return RegisterResult.VALID;                                // R7
     }
 }

@@ -112,4 +112,136 @@ class RegistryPropertiesTest {
 
         org.junit.jupiter.api.Assertions.assertNotNull(resultado);
     }
+
+    /**
+     * Regla R5: TODA persona viva con documento valido y edad entre 0 y 17
+     * se rechaza con UNDERAGE.
+     *
+     * Esta propiedad cubre la clase de equivalencia "menor de edad" completa,
+     * no solo el representante 17 que elegimos a mano en RegistryTest.
+     */
+    @Property
+    void todoMenorDeEdadEsRechazado(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 0, max = 17) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person menor = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.UNDERAGE, new Registry().registerVoter(menor));
+    }
+
+    /** Edades fuera del rango biologicamente posible, por debajo y por encima. */
+    @Provide
+    Arbitrary<Integer> edadesImposibles() {
+        return Arbitraries.oneOf(
+                Arbitraries.integers().between(-10_000, -1),
+                Arbitraries.integers().between(121, 10_000));
+    }
+
+    /**
+     * Regla R4: TODA edad fuera de [0, 120] se rechaza con INVALID_AGE,
+     * tanto por debajo como por encima del rango.
+     *
+     * Aqui la propiedad hace algo que ninguna tabla de ejemplos hace comodamente:
+     * ejercita las dos clases invalidas a la vez y con miles de valores.
+     */
+    @Property
+    void todaEdadFueraDeRangoEsInvalida(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll("edadesImposibles") int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person p = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.INVALID_AGE, new Registry().registerVoter(p));
+    }
+
+    /**
+     * Regla R6: sobre el MISMO registro, inscribir dos veces el mismo documento
+     * siempre da VALID la primera vez y DUPLICATED la segunda.
+     *
+     * Ojo al detalle de diseno: aqui se reutiliza la misma instancia de Registry
+     * a proposito, porque la regla de duplicados es justamente la que depende
+     * del estado acumulado.
+     */
+    @Property
+    void registrarDosVecesElMismoIdSiempreDaDuplicated(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 18, max = 120) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person p = new Person(nombre, id, edad, genero, true);
+        Registry registro = new Registry();
+
+        assertEquals(RegisterResult.VALID, registro.registerVoter(p));
+        assertEquals(RegisterResult.DUPLICATED, registro.registerVoter(p));
+    }
+
+    /**
+     * Regla R2: TODO documento no positivo se rechaza con INVALID, sin importar
+     * si la persona esta viva o su edad.
+     *
+     * Esta propiedad ademas fija el ORDEN de evaluacion: R2 domina sobre R3,
+     * asi que una persona muerta con id = 0 devuelve INVALID y no DEAD.
+     */
+    @Property
+    void todoIdNoPositivoEsInvalido(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = -100_000, max = 0) int id,
+            @ForAll @IntRange(min = 0, max = 120) int edad,
+            @ForAll("generos") Gender genero,
+            @ForAll boolean viva) {
+
+        Person p = new Person(nombre, id, edad, genero, viva);
+
+        assertEquals(RegisterResult.INVALID, new Registry().registerVoter(p));
+    }
+
+    /**
+     * Regla R7: TODA persona viva, con documento valido y edad entre 18 y 120
+     * queda registrada, siempre que el registro este limpio.
+     *
+     * Es la contraparte positiva de las propiedades de rechazo: sin ella, una
+     * implementacion que devolviera INVALID para todo pasaria casi todas las
+     * demas propiedades.
+     */
+    @Property
+    void todoAdultoValidoSeRegistra(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 18, max = 120) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person adulto = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.VALID, new Registry().registerVoter(adulto));
+    }
+
+    /**
+     * Propiedad ESTRUCTURAL (invariante de particion): el resultado siempre es
+     * uno de los valores declarados en RegisterResult.
+     *
+     * Garantiza que ninguna combinacion de entradas cae en un hueco no
+     * contemplado del dominio. Se apoya en el rango COMPLETO de int, incluidos
+     * Integer.MIN_VALUE y MAX_VALUE, donde suelen aparecer los desbordamientos.
+     */
+    @Property
+    void elResultadoSiempreEsUnValorDelEnum(
+            @ForAll("nombres") String nombre,
+            @ForAll int id,
+            @ForAll int edad,
+            @ForAll("generos") Gender genero,
+            @ForAll boolean viva) {
+
+        Person p = new Person(nombre, id, edad, genero, viva);
+
+        RegisterResult resultado = new Registry().registerVoter(p);
+
+        org.junit.jupiter.api.Assertions.assertTrue(
+                java.util.Arrays.asList(RegisterResult.values()).contains(resultado));
+    }
 }

@@ -16,3 +16,14 @@ registraduria/target/
 target/
 
 *.ini
+
+# Estado interno de jqwik (base de datos de contraejemplos entre ejecuciones)
+.jqwik-database
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/

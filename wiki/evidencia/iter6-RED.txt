@@ -1,0 +1,234 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< edu.unisabana.tyvs:registraduria >------------------
+[INFO] Building registraduria 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ registraduria ---
+[INFO] argLine set to -javaagent:C:\\Users\\majoa\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\AyDS\\TYVS-Taller_Pruebas_Unitarias\\registraduria\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ registraduria ---
+[INFO] skip non existing resourceDirectory C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ registraduria ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ registraduria ---
+[INFO] skip non existing resourceDirectory C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ registraduria ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ registraduria ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.unisabana.tyvs.domain.service.RegistryTest
+[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.231 s <<< FAILURE! -- in edu.unisabana.tyvs.domain.service.RegistryTest
+[ERROR] edu.unisabana.tyvs.domain.service.RegistryTest.shouldReturnDuplicatedWhenSameIdRegisteredTwice -- Time elapsed: 0.016 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <DUPLICATED> but was: <VALID>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at edu.unisabana.tyvs.domain.service.RegistryTest.shouldReturnDuplicatedWhenSameIdRegisteredTwice(RegistryTest.java:229)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running edu.unisabana.tyvs.domain.service.RegistryPropertiesTest
+sep. 06, 2026 12:21:20 P.�M. net.jqwik.engine.properties.RandomizedShrinkablesGenerator logEdgeCasesOutnumberTriesIfApplicable
+INFO: Edge case generation exceeds number of tries. Stopped after 1620 generated cases.
+timestamp = 2026-09-06T12:21:20.942810, RegistryPropertiesTest:nuncaDevuelveNullNiLanzaExcepcion = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 1620       | # of all combined edge cases
+edge-cases#tried = 177        | # of edge cases tried in current run
+seed = 1922458390567032803    | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:21:21.057033800, RegistryPropertiesTest:elResultadoNoDependeDeLaInstancia = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 400        | # of all combined edge cases
+edge-cases#tried = 162        | # of edge cases tried in current run
+seed = 5368924451723290526    | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:21:21.144542200, RegistryPropertiesTest:todaEdadFueraDeRangoEsInvalida = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 320        | # of all combined edge cases
+edge-cases#tried = 185        | # of edge cases tried in current run
+seed = -18235022312586387     | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:21:21.201841800, RegistryPropertiesTest:todoMenorDeEdadEsRechazado = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 200        | # of all combined edge cases
+edge-cases#tried = 162        | # of edge cases tried in current run
+seed = -905275616572237498    | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:21:21.271333300, RegistryPropertiesTest:unaPersonaNoVivaSiempreEsRechazada = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 200        | # of all combined edge cases
+edge-cases#tried = 173        | # of edge cases tried in current run
+seed = -9025385763765058763   | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:21:21.383219200, RegistryPropertiesTest:registrarDosVecesElMismoIdSiempreDaDuplicated = 
+  org.opentest4j.AssertionFailedError:
+    expected: <DUPLICATED> but was: <VALID>
+
+                              |-----------------------jqwik-----------------------
+tries = 1                     | # of calls to property
+checks = 1                    | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 160        | # of all combined edge cases
+edge-cases#tried = 0          | # of edge cases tried in current run
+seed = 1454930411546776453    | random seed to reproduce generated values
+
+Shrunk Sample (4 steps)
+-----------------------
+  arg0: ""
+  arg1: 1
+  arg2: 18
+  arg3: MALE
+
+Original Sample
+---------------
+  arg0: "xKvmATVqejjYTpQQq"
+  arg1: 17726
+  arg2: 82
+  arg3: FEMALE
+
+  Original Error
+  --------------
+  org.opentest4j.AssertionFailedError:
+    expected: <DUPLICATED> but was: <VALID>
+
+
+[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.190 s <<< FAILURE! -- in edu.unisabana.tyvs.domain.service.RegistryPropertiesTest
+[ERROR] edu.unisabana.tyvs.domain.service.RegistryPropertiesTest.registrarDosVecesElMismoIdSiempreDaDuplicated -- Time elapsed: 0.140 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <DUPLICATED> but was: <VALID>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at edu.unisabana.tyvs.domain.service.RegistryPropertiesTest.registrarDosVecesElMismoIdSiempreDaDuplicated(RegistryPropertiesTest.java:181)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at net.jqwik.engine.execution.CheckedPropertyFactory.lambda$createRawFunction$1(CheckedPropertyFactory.java:84)
+	at net.jqwik.engine.execution.CheckedPropertyFactory.lambda$createRawFunction$2(CheckedPropertyFactory.java:91)
+	at net.jqwik.engine.properties.CheckedFunction.execute(CheckedFunction.java:17)
+	at net.jqwik.api.lifecycle.AroundTryHook.lambda$static$0(AroundTryHook.java:57)
+	at net.jqwik.engine.execution.lifecycle.HookSupport.lambda$wrap$2(HookSupport.java:48)
+	at net.jqwik.engine.hooks.lifecycle.TryLifecycleMethodsHook.aroundTry(TryLifecycleMethodsHook.java:57)
+	at net.jqwik.engine.execution.lifecycle.HookSupport.lambda$wrap$3(HookSupport.java:53)
+	at net.jqwik.engine.execution.lifecycle.HookSupport.lambda$wrap$2(HookSupport.java:48)
+	at net.jqwik.engine.hooks.lifecycle.BeforeTryMembersHook.aroundTry(BeforeTryMembersHook.java:69)
+	at net.jqwik.engine.execution.lifecycle.HookSupport.lambda$wrap$3(HookSupport.java:53)
+	at net.jqwik.engine.execution.CheckedPropertyFactory.lambda$createTryExecutor$0(CheckedPropertyFactory.java:60)
+	at net.jqwik.engine.execution.lifecycle.AroundTryLifecycle.execute(AroundTryLifecycle.java:23)
+	at net.jqwik.engine.properties.GenericProperty.lambda$createFalsifier$1(GenericProperty.java:229)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.lambda$shrink$0(PropertyShrinker.java:55)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.lambda$shrinkAsLongAsSampleImproves$6(PropertyShrinker.java:122)
+	at net.jqwik.engine.properties.shrinking.AbstractSampleShrinker.lambda$falsify$5(AbstractSampleShrinker.java:91)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1220)
+	at net.jqwik.engine.properties.shrinking.AbstractSampleShrinker.falsify(AbstractSampleShrinker.java:91)
+	at net.jqwik.engine.properties.shrinking.AbstractSampleShrinker.lambda$shrink$2(AbstractSampleShrinker.java:53)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$15$1.accept(ReferencePipeline.java:541)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.AbstractList$RandomAccessSpliterator.tryAdvance(AbstractList.java:706)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findAny(ReferencePipeline.java:652)
+	at net.jqwik.engine.properties.shrinking.AbstractSampleShrinker.shrink(AbstractSampleShrinker.java:63)
+	at net.jqwik.engine.properties.shrinking.OneAfterTheOtherParameterShrinker.shrinkSingleParameter(OneAfterTheOtherParameterShrinker.java:43)
+	at net.jqwik.engine.properties.shrinking.OneAfterTheOtherParameterShrinker.shrink(OneAfterTheOtherParameterShrinker.java:25)
+	at net.jqwik.engine.properties.shrinking.ShrinkingAlgorithm.shrinkOneParameterAfterTheOther(ShrinkingAlgorithm.java:52)
+	at net.jqwik.engine.properties.shrinking.ShrinkingAlgorithm.shrink(ShrinkingAlgorithm.java:32)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.shrinkAsLongAsSampleImproves(PropertyShrinker.java:135)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.lambda$shrink$3(PropertyShrinker.java:87)
+	at net.jqwik.engine.execution.lifecycle.CurrentTestDescriptor.runWithDescriptor(CurrentTestDescriptor.java:17)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.lambda$withTimeout$4(PropertyShrinker.java:103)
+	at net.jqwik.engine.execution.lifecycle.CurrentDomainContext.runWithContext(CurrentDomainContext.java:28)
+	at net.jqwik.engine.properties.shrinking.PropertyShrinker.lambda$withTimeout$5(PropertyShrinker.java:101)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   RegistryPropertiesTest.registrarDosVecesElMismoIdSiempreDaDuplicated:181 expected: <DUPLICATED> but was: <VALID>
+[ERROR]   RegistryTest.shouldReturnDuplicatedWhenSameIdRegisteredTwice:229 expected: <DUPLICATED> but was: <VALID>
+[INFO] 
+[ERROR] Tests run: 22, Failures: 2, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.051 s
+[INFO] Finished at: 2026-09-06T12:21:21-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project registraduria: There are test failures.
+[ERROR] 
+[ERROR] Please refer to C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
