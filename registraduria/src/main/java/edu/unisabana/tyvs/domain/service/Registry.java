@@ -23,6 +23,9 @@ public class Registry {
         if (p == null) {
             return RegisterResult.INVALID; // regla defensiva
         }
+        if (p.getId() <= 0) {
+            return RegisterResult.INVALID;
+        }
         if (!p.isAlive()) {
             return RegisterResult.DEAD;
         }
