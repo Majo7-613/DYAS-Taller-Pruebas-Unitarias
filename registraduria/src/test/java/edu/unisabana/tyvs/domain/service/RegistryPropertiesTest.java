@@ -158,4 +158,26 @@ class RegistryPropertiesTest {
 
         assertEquals(RegisterResult.INVALID_AGE, new Registry().registerVoter(p));
     }
+
+    /**
+     * Regla R6: sobre el MISMO registro, inscribir dos veces el mismo documento
+     * siempre da VALID la primera vez y DUPLICATED la segunda.
+     *
+     * Ojo al detalle de diseno: aqui se reutiliza la misma instancia de Registry
+     * a proposito, porque la regla de duplicados es justamente la que depende
+     * del estado acumulado.
+     */
+    @Property
+    void registrarDosVecesElMismoIdSiempreDaDuplicated(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 18, max = 120) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person p = new Person(nombre, id, edad, genero, true);
+        Registry registro = new Registry();
+
+        assertEquals(RegisterResult.VALID, registro.registerVoter(p));
+        assertEquals(RegisterResult.DUPLICATED, registro.registerVoter(p));
+    }
 }

@@ -207,4 +207,59 @@ public class RegistryTest {
         // Assert: verificar el resultado esperado
         assertEquals(RegisterResult.INVALID_AGE, result);
     }
+
+    // ------------------------------------------------------------------
+    // R6: solo se permite una inscripcion por numero de documento
+    // ------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Dado un documento ya inscrito, "
+            + "cuando registro otra persona con el mismo documento, "
+            + "entonces el resultado es DUPLICATED")
+    void shouldReturnDuplicatedWhenSameIdRegisteredTwice() {
+        // Arrange: dos personas distintas que comparten el numero de documento
+        Person primera = new Person("Karla", 777, 30, Gender.FEMALE, true);
+        Person segunda = new Person("Kevin", 777, 25, Gender.MALE, true);
+        registry.registerVoter(primera);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(segunda);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.DUPLICATED, result);
+    }
+
+    @Test
+    @DisplayName("Dado dos personas con documentos distintos, "
+            + "cuando las registro, entonces ambas quedan registradas")
+    void shouldAllowDifferentIds() {
+        // Arrange: la memoria del registro no debe rechazar documentos distintos
+        Person primera = new Person("Laura", 10, 30, Gender.FEMALE, true);
+        Person segunda = new Person("Mario", 11, 30, Gender.MALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult primerResultado = registry.registerVoter(primera);
+        RegisterResult segundoResultado = registry.registerVoter(segunda);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.VALID, primerResultado);
+        assertEquals(RegisterResult.VALID, segundoResultado);
+    }
+
+    @Test
+    @DisplayName("Dado un intento de registro rechazado, "
+            + "cuando vuelvo a usar ese documento con una persona valida, "
+            + "entonces el resultado es VALID y no DUPLICATED")
+    void shouldNotRegisterIdWhenPersonIsRejected() {
+        // Arrange: un menor de edad no debe ocupar el numero de documento
+        Person menorRechazado = new Person("Nora", 9, 15, Gender.FEMALE, true);
+        Person adultaConElMismoId = new Person("Nora", 9, 20, Gender.FEMALE, true);
+        assertEquals(RegisterResult.UNDERAGE, registry.registerVoter(menorRechazado));
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(adultaConElMismoId);
+
+        // Assert: solo los registros exitosos consumen el documento
+        assertEquals(RegisterResult.VALID, result);
+    }
 }
