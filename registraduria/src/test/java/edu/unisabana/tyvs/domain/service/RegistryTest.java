@@ -107,7 +107,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es VALID")
     void shouldAcceptMinimumValidId() {
         // Arrange: valor limite inferior de la clase de ids validos
-        Person person = new Person("Diego", 1, 25, Gender.MALE, true);
+        Person person = new Person("Diego", Registry.MIN_VALID_ID, 25, Gender.MALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -125,7 +125,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es UNDERAGE")
     void shouldRejectUnderageAt17() {
         // Arrange: valor limite superior de la clase "menor de edad"
-        Person person = new Person("Elena", 3, 17, Gender.FEMALE, true);
+        Person person = new Person("Elena", 3, Registry.MIN_VOTING_AGE - 1, Gender.FEMALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -139,7 +139,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es VALID")
     void shouldAcceptAdultAt18() {
         // Arrange: valor limite inferior de la clase "mayor de edad"
-        Person person = new Person("Felipe", 4, 18, Gender.MALE, true);
+        Person person = new Person("Felipe", 4, Registry.MIN_VOTING_AGE, Gender.MALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -157,7 +157,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es INVALID_AGE")
     void shouldRejectNegativeAge() {
         // Arrange: valor limite inferior de la clase de edades imposibles
-        Person person = new Person("Gloria", 5, -1, Gender.FEMALE, true);
+        Person person = new Person("Gloria", 5, Registry.MIN_AGE - 1, Gender.FEMALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -171,7 +171,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es UNDERAGE y no INVALID_AGE")
     void shouldRejectAgeZeroAsUnderage() {
         // Arrange: 0 es la frontera exacta entre INVALID_AGE y UNDERAGE
-        Person person = new Person("Hugo", 6, 0, Gender.MALE, true);
+        Person person = new Person("Hugo", 6, Registry.MIN_AGE, Gender.MALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -185,7 +185,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es VALID")
     void shouldAcceptMaxAge120() {
         // Arrange: valor limite superior de la clase de edades validas
-        Person person = new Person("Irene", 7, 120, Gender.FEMALE, true);
+        Person person = new Person("Irene", 7, Registry.MAX_AGE, Gender.FEMALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
@@ -199,7 +199,7 @@ public class RegistryTest {
             + "cuando la registro, entonces el resultado es INVALID_AGE")
     void shouldRejectInvalidAgeOver120() {
         // Arrange: primer valor fuera del rango biologicamente posible
-        Person person = new Person("Jorge", 8, 121, Gender.MALE, true);
+        Person person = new Person("Jorge", 8, Registry.MAX_AGE + 1, Gender.MALE, true);
 
         // Act: ejecutar la accion que queremos probar
         RegisterResult result = registry.registerVoter(person);
