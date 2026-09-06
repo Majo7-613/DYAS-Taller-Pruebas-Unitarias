@@ -1,5 +1,7 @@
 # Registro de Defectos — EJEMPLO RESUELTO
 
+> 📌 **La entrega del equipo está en [`registraduria/defectos.md`](registraduria/defectos.md)** — 8 defectos documentados, ninguno abierto.
+
 > ℹ️ **Este archivo es un ejemplo del profesor**, no su entrega. Muestra el nivel de detalle y los dos formatos aceptados.
 > Para su taller, parta de [`defectos_template.md`](defectos_template.md) y documente los defectos que **usted** encuentre al ejecutar sus propias pruebas.
 
