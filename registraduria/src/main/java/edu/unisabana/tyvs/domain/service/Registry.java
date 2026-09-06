@@ -3,6 +3,9 @@ package edu.unisabana.tyvs.domain.service;
 import edu.unisabana.tyvs.domain.model.Person;
 import edu.unisabana.tyvs.domain.model.RegisterResult;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * PUNTO DE PARTIDA DEL TALLER - no es la solucion final.
  *
@@ -18,6 +21,9 @@ import edu.unisabana.tyvs.domain.model.RegisterResult;
  * Escriba PRIMERO la prueba que falla, luego la implementacion minima.
  */
 public class Registry {
+
+    /** Documentos ya inscritos. Es de instancia, nunca estatico: ver README. */
+    private final Set<Integer> registeredIds = new HashSet<>();
 
     public RegisterResult registerVoter(Person p) {
         if (p == null) {
@@ -35,8 +41,11 @@ public class Registry {
         if (p.getAge() < 18) {
             return RegisterResult.UNDERAGE;
         }
-        // Implementacion minima para pasar las pruebas de la iteracion 2.
-        // TODO iteracion 3 en adelante: validar id, edad y duplicados.
+        if (registeredIds.contains(p.getId())) {
+            return RegisterResult.DUPLICATED;
+        }
+        // Solo un registro exitoso consume el numero de documento.
+        registeredIds.add(p.getId());
         return RegisterResult.VALID;
     }
 }
