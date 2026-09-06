@@ -74,7 +74,8 @@ public class Registry {
         if (registeredIds.contains(p.getId())) {                    // R6
             return RegisterResult.DUPLICATED;
         }
-        // Solo un registro exitoso consume el numero de documento.
+        // Solo un registro exitoso consume el numero de documento: si alguna
+        // regla anterior rechaza a la persona, el documento sigue libre.
         registeredIds.add(p.getId());
         return RegisterResult.VALID;                                // R7
     }

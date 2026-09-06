@@ -1,0 +1,197 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< edu.unisabana.tyvs:registraduria >------------------
+[INFO] Building registraduria 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ registraduria ---
+[INFO] argLine set to -javaagent:C:\\Users\\majoa\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\AyDS\\TYVS-Taller_Pruebas_Unitarias\\registraduria\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ registraduria ---
+[INFO] skip non existing resourceDirectory C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ registraduria ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ registraduria ---
+[INFO] skip non existing resourceDirectory C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ registraduria ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ registraduria ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.unisabana.tyvs.domain.model.PersonTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s -- in edu.unisabana.tyvs.domain.model.PersonTest
+[INFO] Running edu.unisabana.tyvs.domain.service.RegistryTest
+[ERROR] Tests run: 18, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.153 s <<< FAILURE! -- in edu.unisabana.tyvs.domain.service.RegistryTest
+[ERROR] edu.unisabana.tyvs.domain.service.RegistryTest.shouldNotRegisterIdWhenPersonIsRejected -- Time elapsed: 0.018 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <VALID> but was: <DUPLICATED>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at edu.unisabana.tyvs.domain.service.RegistryTest.shouldNotRegisterIdWhenPersonIsRejected(RegistryTest.java:263)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running edu.unisabana.tyvs.domain.service.RegistryPropertiesTest
+sep. 06, 2026 12:34:48 P.�M. net.jqwik.engine.execution.AfterFailureParametersGenerator logAfterFailureHandling
+INFO: After Failure Handling: SAMPLE_FIRST, Previous Generation: <GenerationInfo(7710696948200813029, 1, [size=3])>
+timestamp = 2026-09-06T12:34:49.211388200, RegistryPropertiesTest:todoAdultoValidoSeRegistra = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 160        | # of all combined edge cases
+edge-cases#tried = 145        | # of edge cases tried in current run
+seed = 7710696948200813029    | random seed to reproduce generated values
+
+
+sep. 06, 2026 12:34:49 P.�M. net.jqwik.engine.properties.RandomizedShrinkablesGenerator logEdgeCasesOutnumberTriesIfApplicable
+INFO: Edge case generation exceeds number of tries. Stopped after 1620 generated cases.
+timestamp = 2026-09-06T12:34:49.300175300, RegistryPropertiesTest:elResultadoSiempreEsUnValorDelEnum = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 1620       | # of all combined edge cases
+edge-cases#tried = 155        | # of edge cases tried in current run
+seed = -6359101212470059018   | random seed to reproduce generated values
+
+
+sep. 06, 2026 12:34:49 P.�M. net.jqwik.engine.properties.RandomizedShrinkablesGenerator logEdgeCasesOutnumberTriesIfApplicable
+INFO: Edge case generation exceeds number of tries. Stopped after 1620 generated cases.
+timestamp = 2026-09-06T12:34:49.375905800, RegistryPropertiesTest:nuncaDevuelveNullNiLanzaExcepcion = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 1620       | # of all combined edge cases
+edge-cases#tried = 169        | # of edge cases tried in current run
+seed = -11533723255340981     | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:34:49.441620300, RegistryPropertiesTest:elResultadoNoDependeDeLaInstancia = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 400        | # of all combined edge cases
+edge-cases#tried = 161        | # of edge cases tried in current run
+seed = -7154409686011752465   | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:34:49.501647800, RegistryPropertiesTest:todaEdadFueraDeRangoEsInvalida = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 320        | # of all combined edge cases
+edge-cases#tried = 167        | # of edge cases tried in current run
+seed = -8106197394544026098   | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:34:49.590540700, RegistryPropertiesTest:todoMenorDeEdadEsRechazado = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 200        | # of all combined edge cases
+edge-cases#tried = 191        | # of edge cases tried in current run
+seed = 2429484764224077704    | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:34:49.647664400, RegistryPropertiesTest:todoIdNoPositivoEsInvalido = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 500        | # of all combined edge cases
+edge-cases#tried = 161        | # of edge cases tried in current run
+seed = 1163021950391801438    | random seed to reproduce generated values
+
+
+timestamp = 2026-09-06T12:34:49.710485700, RegistryPropertiesTest:unaPersonaNoVivaSiempreEsRechazada = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 200        | # of all combined edge cases
+edge-cases#tried = 169        | # of edge cases tried in current run
+seed = -1449692523977297935   | random seed to reproduce generated values
+
+
+sep. 06, 2026 12:34:49 P.�M. net.jqwik.engine.execution.AfterFailureParametersGenerator logAfterFailureHandling
+INFO: After Failure Handling: SAMPLE_FIRST, Previous Generation: <GenerationInfo(4451468902243300503, 1, [size=3])>
+timestamp = 2026-09-06T12:34:49.772123500, RegistryPropertiesTest:registrarDosVecesElMismoIdSiempreDaDuplicated = 
+                              |-----------------------jqwik-----------------------
+tries = 1000                  | # of calls to property
+checks = 1000                 | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 160        | # of all combined edge cases
+edge-cases#tried = 137        | # of edge cases tried in current run
+seed = 4451468902243300503    | random seed to reproduce generated values
+
+
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.332 s -- in edu.unisabana.tyvs.domain.service.RegistryPropertiesTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   RegistryTest.shouldNotRegisterIdWhenPersonIsRejected:263 expected: <VALID> but was: <DUPLICATED>
+[INFO] 
+[ERROR] Tests run: 30, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.370 s
+[INFO] Finished at: 2026-09-06T12:34:50-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project registraduria: There are test failures.
+[ERROR] 
+[ERROR] Please refer to C:\AyDS\TYVS-Taller_Pruebas_Unitarias\registraduria\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
