@@ -262,4 +262,38 @@ public class RegistryTest {
         // Assert: solo los registros exitosos consumen el documento
         assertEquals(RegisterResult.VALID, result);
     }
+
+    // ------------------------------------------------------------------
+    // Orden de evaluacion R1 -> R7: la PRIMERA regla que falla determina el
+    // resultado. Es una decision de diseno, y por eso se fija con pruebas:
+    // si alguien reordena las guardas, estas pruebas se caen.
+    // ------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Dado una persona no viva y menor de edad, "
+            + "cuando la registro, entonces el resultado es DEAD y no UNDERAGE")
+    void shouldPrioritizeDeadOverUnderage() {
+        // Arrange: la persona incumple R3 y R5 al mismo tiempo
+        Person person = new Person("Olga", 12, 15, Gender.FEMALE, false);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: R3 se evalua antes que R5
+        assertEquals(RegisterResult.DEAD, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona no viva y con documento invalido, "
+            + "cuando la registro, entonces el resultado es INVALID y no DEAD")
+    void shouldPrioritizeInvalidIdOverDead() {
+        // Arrange: la persona incumple R2 y R3 al mismo tiempo
+        Person person = new Person("Pedro", 0, 40, Gender.MALE, false);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: R2 se evalua antes que R3
+        assertEquals(RegisterResult.INVALID, result);
+    }
 }

@@ -180,4 +180,68 @@ class RegistryPropertiesTest {
         assertEquals(RegisterResult.VALID, registro.registerVoter(p));
         assertEquals(RegisterResult.DUPLICATED, registro.registerVoter(p));
     }
+
+    /**
+     * Regla R2: TODO documento no positivo se rechaza con INVALID, sin importar
+     * si la persona esta viva o su edad.
+     *
+     * Esta propiedad ademas fija el ORDEN de evaluacion: R2 domina sobre R3,
+     * asi que una persona muerta con id = 0 devuelve INVALID y no DEAD.
+     */
+    @Property
+    void todoIdNoPositivoEsInvalido(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = -100_000, max = 0) int id,
+            @ForAll @IntRange(min = 0, max = 120) int edad,
+            @ForAll("generos") Gender genero,
+            @ForAll boolean viva) {
+
+        Person p = new Person(nombre, id, edad, genero, viva);
+
+        assertEquals(RegisterResult.INVALID, new Registry().registerVoter(p));
+    }
+
+    /**
+     * Regla R7: TODA persona viva, con documento valido y edad entre 18 y 120
+     * queda registrada, siempre que el registro este limpio.
+     *
+     * Es la contraparte positiva de las propiedades de rechazo: sin ella, una
+     * implementacion que devolviera INVALID para todo pasaria casi todas las
+     * demas propiedades.
+     */
+    @Property
+    void todoAdultoValidoSeRegistra(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 18, max = 120) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person adulto = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.VALID, new Registry().registerVoter(adulto));
+    }
+
+    /**
+     * Propiedad ESTRUCTURAL (invariante de particion): el resultado siempre es
+     * uno de los valores declarados en RegisterResult.
+     *
+     * Garantiza que ninguna combinacion de entradas cae en un hueco no
+     * contemplado del dominio. Se apoya en el rango COMPLETO de int, incluidos
+     * Integer.MIN_VALUE y MAX_VALUE, donde suelen aparecer los desbordamientos.
+     */
+    @Property
+    void elResultadoSiempreEsUnValorDelEnum(
+            @ForAll("nombres") String nombre,
+            @ForAll int id,
+            @ForAll int edad,
+            @ForAll("generos") Gender genero,
+            @ForAll boolean viva) {
+
+        Person p = new Person(nombre, id, edad, genero, viva);
+
+        RegisterResult resultado = new Registry().registerVoter(p);
+
+        org.junit.jupiter.api.Assertions.assertTrue(
+                java.util.Arrays.asList(RegisterResult.values()).contains(resultado));
+    }
 }
