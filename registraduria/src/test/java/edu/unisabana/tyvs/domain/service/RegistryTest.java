@@ -6,6 +6,8 @@ import edu.unisabana.tyvs.domain.model.RegisterResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -79,5 +81,38 @@ public class RegistryTest {
 
         // Assert: verificar el resultado esperado
         assertEquals(RegisterResult.INVALID, result);
+    }
+
+    // ------------------------------------------------------------------
+    // R2: el numero de documento debe ser positivo (id > 0)
+    // ------------------------------------------------------------------
+
+    @ParameterizedTest(name = "id = {0}")
+    @ValueSource(ints = {0, -1, -5})
+    @DisplayName("Dado una persona viva con documento no positivo, "
+            + "cuando la registro, entonces el resultado es INVALID")
+    void shouldRejectWhenIdIsZeroOrNegative(int invalidId) {
+        // Arrange: preparar los datos
+        Person person = new Person("Beatriz", invalidId, 25, Gender.FEMALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.INVALID, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona viva con el documento positivo mas pequenio (id = 1), "
+            + "cuando la registro, entonces el resultado es VALID")
+    void shouldAcceptMinimumValidId() {
+        // Arrange: valor limite inferior de la clase de ids validos
+        Person person = new Person("Diego", 1, 25, Gender.MALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.VALID, result);
     }
 }
