@@ -1,0 +1,15 @@
+REPORTE PIT - ANTES de agregar PersonTest
+Comando: mvn test-compile org.pitest:pitest-maven:mutationCoverage
+
+Mutantes generados : 24
+Mutantes eliminados: 22
+Mutation score     : 91,67 %
+
+MUTANTES SOBREVIVIENTES
+-----------------------
+[NO_COVERAGE] edu.unisabana.tyvs.domain.model.Person.getGender(), linea 31
+   mutador: org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator
+   cambio : replaced return value with null for edu/unisabana/tyvs/domain/model/Person::getGender
+[NO_COVERAGE] edu.unisabana.tyvs.domain.model.Person.getName(), linea 19
+   mutador: org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator
+   cambio : replaced return value with "" for edu/unisabana/tyvs/domain/model/Person::getName

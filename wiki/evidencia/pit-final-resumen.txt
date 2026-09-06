@@ -1,0 +1,16 @@
+REPORTE PIT - DESPUES de agregar PersonTest
+
+Mutantes generados : 24
+Mutantes eliminados: 24
+Mutation score     : 100,00 %
+
+MUTANTES SOBREVIVIENTES: ninguno.
+
+Detalle por mutador:
+  8   returns.NullReturnValsMutator
+  7   NegateConditionalsMutator
+  4   ConditionalsBoundaryMutator
+  2   returns.PrimitiveReturnsMutator
+  1   returns.BooleanFalseReturnValsMutator
+  1   returns.BooleanTrueReturnValsMutator
+  1   returns.EmptyObjectReturnValsMutator
