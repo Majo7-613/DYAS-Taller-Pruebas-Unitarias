@@ -29,6 +29,9 @@ public class Registry {
         if (!p.isAlive()) {
             return RegisterResult.DEAD;
         }
+        if (p.getAge() < 18) {
+            return RegisterResult.UNDERAGE;
+        }
         // Implementacion minima para pasar las pruebas de la iteracion 2.
         // TODO iteracion 3 en adelante: validar id, edad y duplicados.
         return RegisterResult.VALID;
