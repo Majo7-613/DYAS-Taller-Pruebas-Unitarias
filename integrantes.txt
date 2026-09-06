@@ -1,0 +1,10 @@
+Taller de Pruebas Unitarias - Desarrollo dirigido por pruebas (TDD)
+Testing y Validacion de Software
+
+Repositorio: https://github.com/Majo7-613/DYAS-Taller-Pruebas-Unitarias
+Proyecto Maven: registraduria/
+
+INTEGRANTES
+-----------
+
+1. Maria Jose Almanza Caviedes
