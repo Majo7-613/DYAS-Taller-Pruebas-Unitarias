@@ -147,4 +147,64 @@ public class RegistryTest {
         // Assert: verificar el resultado esperado
         assertEquals(RegisterResult.VALID, result);
     }
+
+    // ------------------------------------------------------------------
+    // R4: la edad debe ser biologicamente posible (0 <= edad <= 120)
+    // ------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Dado una persona viva con edad negativa (-1), "
+            + "cuando la registro, entonces el resultado es INVALID_AGE")
+    void shouldRejectNegativeAge() {
+        // Arrange: valor limite inferior de la clase de edades imposibles
+        Person person = new Person("Gloria", 5, -1, Gender.FEMALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: la edad imposible manda sobre la minoria de edad
+        assertEquals(RegisterResult.INVALID_AGE, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona viva de 0 anios, "
+            + "cuando la registro, entonces el resultado es UNDERAGE y no INVALID_AGE")
+    void shouldRejectAgeZeroAsUnderage() {
+        // Arrange: 0 es la frontera exacta entre INVALID_AGE y UNDERAGE
+        Person person = new Person("Hugo", 6, 0, Gender.MALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: 0 es biologicamente posible, asi que la regla que aplica es R5
+        assertEquals(RegisterResult.UNDERAGE, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona viva de 120 anios con id valido, "
+            + "cuando la registro, entonces el resultado es VALID")
+    void shouldAcceptMaxAge120() {
+        // Arrange: valor limite superior de la clase de edades validas
+        Person person = new Person("Irene", 7, 120, Gender.FEMALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.VALID, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona viva de 121 anios, "
+            + "cuando la registro, entonces el resultado es INVALID_AGE")
+    void shouldRejectInvalidAgeOver120() {
+        // Arrange: primer valor fuera del rango biologicamente posible
+        Person person = new Person("Jorge", 8, 121, Gender.MALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.INVALID_AGE, result);
+    }
 }

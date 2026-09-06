@@ -131,4 +131,31 @@ class RegistryPropertiesTest {
 
         assertEquals(RegisterResult.UNDERAGE, new Registry().registerVoter(menor));
     }
+
+    /** Edades fuera del rango biologicamente posible, por debajo y por encima. */
+    @Provide
+    Arbitrary<Integer> edadesImposibles() {
+        return Arbitraries.oneOf(
+                Arbitraries.integers().between(-10_000, -1),
+                Arbitraries.integers().between(121, 10_000));
+    }
+
+    /**
+     * Regla R4: TODA edad fuera de [0, 120] se rechaza con INVALID_AGE,
+     * tanto por debajo como por encima del rango.
+     *
+     * Aqui la propiedad hace algo que ninguna tabla de ejemplos hace comodamente:
+     * ejercita las dos clases invalidas a la vez y con miles de valores.
+     */
+    @Property
+    void todaEdadFueraDeRangoEsInvalida(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll("edadesImposibles") int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person p = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.INVALID_AGE, new Registry().registerVoter(p));
+    }
 }
