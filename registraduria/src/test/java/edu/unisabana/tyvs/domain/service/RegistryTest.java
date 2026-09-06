@@ -115,4 +115,36 @@ public class RegistryTest {
         // Assert: verificar el resultado esperado
         assertEquals(RegisterResult.VALID, result);
     }
+
+    // ------------------------------------------------------------------
+    // R5: la persona debe ser mayor de edad (edad >= 18)
+    // ------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Dado una persona viva de 17 anios con id valido, "
+            + "cuando la registro, entonces el resultado es UNDERAGE")
+    void shouldRejectUnderageAt17() {
+        // Arrange: valor limite superior de la clase "menor de edad"
+        Person person = new Person("Elena", 3, 17, Gender.FEMALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.UNDERAGE, result);
+    }
+
+    @Test
+    @DisplayName("Dado una persona viva de 18 anios con id valido, "
+            + "cuando la registro, entonces el resultado es VALID")
+    void shouldAcceptAdultAt18() {
+        // Arrange: valor limite inferior de la clase "mayor de edad"
+        Person person = new Person("Felipe", 4, 18, Gender.MALE, true);
+
+        // Act: ejecutar la accion que queremos probar
+        RegisterResult result = registry.registerVoter(person);
+
+        // Assert: verificar el resultado esperado
+        assertEquals(RegisterResult.VALID, result);
+    }
 }

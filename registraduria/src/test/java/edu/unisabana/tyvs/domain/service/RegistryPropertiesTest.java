@@ -112,4 +112,23 @@ class RegistryPropertiesTest {
 
         org.junit.jupiter.api.Assertions.assertNotNull(resultado);
     }
+
+    /**
+     * Regla R5: TODA persona viva con documento valido y edad entre 0 y 17
+     * se rechaza con UNDERAGE.
+     *
+     * Esta propiedad cubre la clase de equivalencia "menor de edad" completa,
+     * no solo el representante 17 que elegimos a mano en RegistryTest.
+     */
+    @Property
+    void todoMenorDeEdadEsRechazado(
+            @ForAll("nombres") String nombre,
+            @ForAll @IntRange(min = 1, max = 100_000) int id,
+            @ForAll @IntRange(min = 0, max = 17) int edad,
+            @ForAll("generos") Gender genero) {
+
+        Person menor = new Person(nombre, id, edad, genero, true);
+
+        assertEquals(RegisterResult.UNDERAGE, new Registry().registerVoter(menor));
+    }
 }
